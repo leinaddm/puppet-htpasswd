@@ -1,4 +1,4 @@
-Manages an Apache style htpasswd file
+Manages Apache style htpasswd and htgroup files
 
 # add a user
 htpasswd { user:
@@ -9,7 +9,18 @@ htpasswd { user:
 # remove a user
 htpasswd { user:
   ensure => absent,
-  target => "/etc/httpd/conf/htpasswd",
+  target => '/etc/httpd/conf/htpasswd',
 }
 
 
+# add a group
+htgroup { groupname:
+  users  => [ user1, user2, ],
+  target => '/etc/httpd/conf/htgroup,
+}
+
+# remove a group
+htgroup { groupname:
+  ensure => absent,
+  target => '/etc/httpd/conf/htgroup,
+}

@@ -11,8 +11,7 @@ module Puppet
     ensurable
 
     newparam(:name, :namevar => true) do
-      desc "The resource name"
-      isnamevar
+      desc "The user name"
     end
 
     newproperty(:cryptpasswd) do
