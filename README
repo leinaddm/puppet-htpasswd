@@ -1,15 +1,13 @@
 Manages an Apache style htpasswd file
 
-Drop in your module path to install
-
 # add a user
-htpasswd { "user":
-  cryptpasswd => "MrC7Aq3qPKPaK",  # encrypted password hash goes here
-  target => "/etc/httpd/conf/htpasswd",
+htpasswd { user:
+  cryptpasswd => 'MrC7Aq3qPKPaK',  # encrypted password hash goes here
+  target      => '/etc/httpd/conf/htpasswd',
 }
 
 # remove a user
-htpasswd { "user":
+htpasswd { user:
   ensure => absent,
   target => "/etc/httpd/conf/htpasswd",
 }
