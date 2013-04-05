@@ -1,9 +1,16 @@
 Manages Apache style htpasswd and htgroup files
 
 # add a user
-htpasswd { user:
-  cryptpasswd => 'MrC7Aq3qPKPaK',  # encrypted password hash goes here
+htpasswd { 'dan':
+  cryptpasswd => 'MrC7Aq3qPKPaK',  # encrypted password
   target      => '/etc/httpd/conf/htpasswd',
+}
+
+# supports adding a user with the same name to a different file
+htpasswd { 'dan2':
+  username    => 'dan',
+  cryptpasswd => 'djkhfsdhfkjsd',  # encrypted password
+  target      => '/etc/httpd/conf/htpasswd2',
 }
 
 # remove a user
@@ -11,6 +18,8 @@ htpasswd { user:
   ensure => absent,
   target => '/etc/httpd/conf/htpasswd',
 }
+
+
 
 
 # add a group

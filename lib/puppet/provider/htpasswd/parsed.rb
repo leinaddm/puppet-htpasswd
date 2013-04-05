@@ -10,7 +10,32 @@ Puppet::Type.type(:htpasswd).provide(
 
   desc "htpasswd provider that uses the ParsedFile class"
 
-  text_line :comment, :match => /^#/;
-  text_line :blank, :match => /^\s*$/;
-  record_line :parsed, :fields => %w{name cryptpasswd}, :joiner => ':', :separator => ':'
+  text_line :blank, :match => /^\s*$/
+  text_line :comment, :match => /^#/,
+    :post_parse => proc { |record| record[:name] = $1 if record[:line] =~ /Puppet Name: (.+)\s*$/ }
+  record_line :parsed, :fields => %w{username cryptpasswd},
+    :joiner => ':',
+    :separator => ':',
+    :block_eval => :instance do
+      def to_line(record)
+        str = ""
+        str = "# Puppet Name: #{record[:name]}\n" if record[:name]
+        str += "#{record[:username]}:#{record[:cryptpasswd]}"
+      end
+    end
+
+  def self.prefetch_hook(records)
+    name = nil
+    res = records.each do |record|
+      case record[:record_type]
+      when :comment
+        if record[:name]
+          name = record[:name]
+          record[:skip] = true
+        end
+      else
+        record[:name] = name
+      end
+    end.reject { |record| record[:skip] }
+  end
 end

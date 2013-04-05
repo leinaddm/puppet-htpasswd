@@ -11,7 +11,12 @@ module Puppet
     ensurable
 
     newparam(:name, :namevar => true) do
-      desc "The user name"
+      desc "The resource name"
+    end
+
+    newproperty(:username) do
+      desc "The user name. Defaults to the resource title if not provided"
+      defaultto { @resource[:name] }
     end
 
     newproperty(:cryptpasswd) do
