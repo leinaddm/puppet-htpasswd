@@ -1,6 +1,9 @@
 # htpasswd
 Puppet module to manage htpasswd and htgroup files
 
+# Compatibility
+Puppet v3.x with Ruby v1.8.7
+
 ## htpasswd type
 
 ### add a user
