@@ -1,4 +1,4 @@
-require 'sha1'
+require 'digest/sha1'
 require 'base64'
 
 module Puppet::Parser::Functions
