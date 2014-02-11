@@ -72,23 +72,21 @@ Puppet::Parser::Functions::newfunction(:ht_md5, :type => :rvalue, :doc => <<-EOS
       end
 
 
-      puts pd[0].inspect
-      puts pd[0]<<16.inspect
-      l = (pd[ 0]<<16) | (pd[ 6]<<8) | pd[12]
+      l = (pd[ 0].ord<<16) | (pd[ 6].ord<<8) | pd[12].ord
       encoded_password << to_64(l, 4)
 
-      l = (pd[ 1]<<16) | (pd[ 7]<<8) | pd[13]
+      l = (pd[ 1].ord<<16) | (pd[ 7].ord<<8) | pd[13].ord
       encoded_password << to_64(l, 4)
 
-      l = (pd[ 2]<<16) | (pd[ 8]<<8) | pd[14]
+      l = (pd[ 2].ord<<16) | (pd[ 8].ord<<8) | pd[14].ord
       encoded_password << to_64(l, 4)
 
-      l = (pd[ 3]<<16) | (pd[ 9]<<8) | pd[15]
+      l = (pd[ 3].ord<<16) | (pd[ 9].ord<<8) | pd[15].ord
       encoded_password << to_64(l, 4)
 
-      l = (pd[ 4]<<16) | (pd[10]<<8) | pd[ 5]
+      l = (pd[ 4].ord<<16) | (pd[10].ord<<8) | pd[ 5].ord
       encoded_password << to_64(l, 4)
-      encoded_password << to_64(pd[11],2)
+      encoded_password << to_64(pd[11].ord,2)
 
       return encoded_password
     end
