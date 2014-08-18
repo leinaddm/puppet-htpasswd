@@ -1,5 +1,20 @@
 # htpasswd
-Puppet module to manage htpasswd and htgroup files
+Puppet module to manage htpasswd and htgroup files.
+
+This module has the ability to manage users with the same username in
+multiple files. To be able to do this it uses the same approach that the
+builtin cron type uses with cronjobs: a marker comment before the
+managed entry. This means that you can not use this module to manage or
+remove existing entries in htpasswd files. If you need to manage exiting
+entries you can use https://github.com/benwtr/puppet-htpasswd , but your
+usernames will have to be unique across all managed htpasswd files on
+the same host.
+
+This module does not manage the owner/group/mode of the htpasswd and
+htgroup files you specify. You have to use a separate `file` resource
+for that (see
+[here](https://github.com/leinaddm/puppet-htpasswd/issues/1#issuecomment-23632979)
+for an explanation).
 
 ## Compatibility
 Puppet v3.x with Ruby v1.8.7, v1.9.3, v2.0.0
