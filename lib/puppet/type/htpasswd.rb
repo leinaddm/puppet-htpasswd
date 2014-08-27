@@ -22,6 +22,11 @@ module Puppet
     newproperty(:cryptpasswd) do
       desc "The encrypted password for the given user"
       isrequired
+
+      def change_to_s(old_value, desired)
+        # redact cryptpasswd from logs
+        "cryptpasswd changed"
+      end
     end
 
     newproperty(:target) do
