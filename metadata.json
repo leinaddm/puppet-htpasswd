@@ -13,5 +13,5 @@
   "summary": "htpasswd module",
   "description": "Puppet module to manage htpasswd and htgroup files",
   "project_page": "https://github.com/leinaddm/puppet-htpasswd",
-  "dependencies": [],
+  "dependencies": []
 }
