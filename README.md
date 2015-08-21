@@ -70,5 +70,33 @@ encrypt 'password' with 'salt' using the apache MD5 method
 ### ht_sha1('password')
 encrypt 'password' using the apache SHA1 method
 
+## Hiera
+
+You can configure all htpasswd files in hiera as well:
+
+    htpasswd::files::htpasswdfiles:
+      '/etc/nginx/htpasswd':
+        ensure: present
+        owner: 'www-data'
+        group: 'root'
+        users:
+          'nancy':
+            cryptpasswd: '$apr1$fhz0Twfs8rET9F9dbwNc7R$NazJdE/.'
+          'zoe':
+            cryptpasswd: '$apr1$naEC$MpXMfbJAGsT4SWa1gTNbj6mTs/'
+          'dan':
+            cryptpasswd: '$apr1$n04/cJWO$Nmpr9rs.tTsTvsuWgLV3k.'
+      '/var/www/restricted/.htpasswd':
+        users:
+          'dan-2':
+            username: 'dan'
+            cryptpasswd: '$apr1$n04/cJWO$Nmpr9rs.tTsTvsuWgLV3k.'
+
+Then simply
+
+    include ::htpasswd::files
+
+to write all configured htpasswd files.
+
 # Credits
 Apache MD5 algorithm ruby implementation taken from https://github.com/copiousfreetime/htauth by Jeremy Hinegardner.
