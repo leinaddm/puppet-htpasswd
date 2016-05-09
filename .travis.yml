@@ -1,16 +1,22 @@
 ---
 env:
-- PUPPET_VERSION=3.3.2
-- PUPPET_VERSION=3.4.2
-- PUPPET_VERSION=4
+  matrix:
+    - PUPPET_GEM_VERSION="~> 3.3.2"
+    - PUPPET_GEM_VERSION="~> 3.4.2"
+    - PUPPET_GEM_VERSION="~> 4"
 notifications:
 email: false
 rvm:
-- 1.8.7
-- 1.9.3
-- 2.0.0
+  - 1.8.7
+  - 1.9.3
+  - 2.0.0
+
 matrix:
   fast_finish: true
+  exclude:
+    - rvm: 1.8.7
+      env: PUPPET_GEM_VERSION="~> 4"
+
 language: ruby
 before_script: "gem install --no-ri --no-rdoc bundler"
 script: 'bundle exec rake validate && bundle exec rake lint && SPEC_OPTS="--format documentation" bundle exec rake spec'
