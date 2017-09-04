@@ -1,5 +1,5 @@
-module Puppet::Type
-  newtype(:htpasswd) do
+module Puppet
+  Puppet::Type.newtype(:htpasswd) do
     @doc = "Manage an Apache style htpasswd file
 
     htpasswd { 'user':
