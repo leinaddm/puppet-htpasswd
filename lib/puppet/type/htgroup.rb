@@ -1,4 +1,4 @@
-module Puppet
+module Puppet::Type
   newtype(:htgroup) do
     @doc = "Manage an Apache style htgroup file
 

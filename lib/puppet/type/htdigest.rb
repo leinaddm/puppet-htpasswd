@@ -1,4 +1,4 @@
-module Puppet
+module Puppet::Type
   newtype(:htdigest) do
     @doc = "Manage an Apache style htdigest file
 
